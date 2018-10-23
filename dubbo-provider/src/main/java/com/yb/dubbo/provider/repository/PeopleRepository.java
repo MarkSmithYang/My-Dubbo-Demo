@@ -1,6 +1,5 @@
 package com.yb.dubbo.provider.repository;
 
-import com.yb.dubbo.common.model.People;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,19 +24,22 @@ public class PeopleRepository {
 
     /**
      * 查询所有people数据
+     *
      * @return
      */
     public List<Map<String, Object>> findAll() {
+        //把map在封装成people是没有必要的,因为返回的数据都是key:vaule的json格式
         List<Map<String, Object>> result = jdbcTemplate.queryForList("select * from people");
         return result;
     }
 
     /**
      * 根据id查询people信息
+     *
      * @return
      */
-    public People findById(String id) {
-        List<People> people = jdbcTemplate.queryForList("select * from people where id=?", People.class, id);
-        return CollectionUtils.isNotEmpty(people)?people.get(0):null;
+    public Map<String, Object> findById(String id) {
+        List<Map<String, Object>> maps = jdbcTemplate.queryForList("select * from people where id=?", id);
+        return CollectionUtils.isNotEmpty(maps)?maps.get(0):null;
     }
 }

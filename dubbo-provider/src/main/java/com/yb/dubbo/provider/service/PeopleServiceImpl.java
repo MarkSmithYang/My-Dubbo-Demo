@@ -1,7 +1,6 @@
 package com.yb.dubbo.provider.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.yb.dubbo.common.model.People;
 import com.yb.dubbo.common.service.PeopleService;
 import com.yb.dubbo.provider.repository.PeopleRepository;
 import org.apache.commons.lang3.StringUtils;
@@ -17,8 +16,7 @@ import java.util.Map;
  * @Description:
  * @date 2018/10/22
  */
-@Service(interfaceName = "com.yb.dubbo.common.service.PeopleService")
-@org.springframework.stereotype.Service
+@Service
 public class PeopleServiceImpl implements PeopleService {
      public static final Logger log = LoggerFactory.getLogger(PeopleServiceImpl.class);
 
@@ -32,12 +30,12 @@ public class PeopleServiceImpl implements PeopleService {
     }
 
     @Override
-    public People findById(String id) {
+    public Map<String, Object> findById(String id) {
         if(StringUtils.isBlank(id)){
             log.info("findById(String id)方法的id为空");
             return null;
         }
-        People result = peopleRepository.findById(id);
+        Map<String, Object> result = peopleRepository.findById(id);
         return result;
     }
 }

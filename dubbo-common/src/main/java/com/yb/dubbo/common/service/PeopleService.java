@@ -1,7 +1,5 @@
 package com.yb.dubbo.common.service;
 
-
-import com.yb.dubbo.common.model.People;
 import java.util.List;
 import java.util.Map;
 
@@ -14,5 +12,5 @@ public interface PeopleService {
 
     public List<Map<String, Object>> findAll();
 
-    public People findById(String id);
+    public Map<String, Object> findById(String id);
 }

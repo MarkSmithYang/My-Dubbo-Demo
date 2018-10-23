@@ -1,7 +1,6 @@
 package com.yb.dubbo.consumer.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.yb.dubbo.common.model.People;
 import com.yb.dubbo.common.service.PeopleService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,18 +19,18 @@ import java.util.Map;
 @CrossOrigin
 public class PeopleController {
 
-   @Reference(interfaceName = "com.yb.dubbo.common.service.PeopleService")
-   private PeopleService peopleService;
+    @Reference(interfaceName = "com.yb.dubbo.common.service.PeopleService")
+    private PeopleService peopleService;
 
     @GetMapping("findAll")
-    public List<Map<String,Object>> findAll(){
+    public List<Map<String, Object>> findAll() {
         List<Map<String, Object>> result = peopleService.findAll();
         return result;
     }
 
     @GetMapping("findById")
-    public People findById(@RequestParam String id){
-        People result = peopleService.findById(id);
+    public Map<String, Object> findById(@RequestParam String id) {
+        Map<String, Object> result = peopleService.findById(id);
         return result;
     }
 
